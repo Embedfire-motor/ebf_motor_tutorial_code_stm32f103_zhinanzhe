@@ -3,11 +3,11 @@
 
 #include "stm32f1xx.h"
 
-#define ADVANCE_TIM           		  TIM1
-#define ADVANCE_TIM_CLK_ENABLE()  	__HAL_RCC_TIM1_CLK_ENABLE()
+#define ADVANCE_TIM           		  TIM8
+#define ADVANCE_TIM_CLK_ENABLE()  	__HAL_RCC_TIM8_CLK_ENABLE()
 
-#define ADVANCE_TIM_IRQn		        TIM1_UP_TIM10_IRQn
-#define ADVANCE_TIM_IRQHandler      TIM1_UP_TIM10_IRQHandler
+#define ADVANCE_TIM_IRQn		        TIM8_UP_IRQn
+#define ADVANCE_TIM_IRQHandler      TIM8_UP_IRQHandler
 
 extern TIM_HandleTypeDef TIM_TimeBaseStructure;
 
