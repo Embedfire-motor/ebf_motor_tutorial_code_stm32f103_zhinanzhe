@@ -5,12 +5,12 @@
 
 
 /* 通用定时器 */
-#define GENERAL_TIM                       TIM2
-#define GENERAL_TIM_CLK_ENABLE()          __HAL_RCC_TIM2_CLK_ENABLE()
+#define GENERAL_TIM                       TIM3
+#define GENERAL_TIM_CLK_ENABLE()          __HAL_RCC_TIM3_CLK_ENABLE()
 
 /* 通用定时器PWM输出 */
 /* PWM输出引脚 */
-#define GENERAL_OCPWM_PIN                 GPIO_PIN_0              
+#define GENERAL_OCPWM_PIN                 GPIO_PIN_7              
 #define GENERAL_OCPWM_GPIO_PORT           GPIOA                
 #define GENERAL_OCPWM_GPIO_CLK_ENABLE()   __HAL_RCC_GPIOA_CLK_ENABLE()
 
