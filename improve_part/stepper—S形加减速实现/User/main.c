@@ -8,7 +8,7 @@
   ******************************************************************************
   * @attention
   *
-  * 实验平台:野火 F103-霸道 STM32 开发板 
+  * 实验平台:野火 F103-指南者 STM32 开发板 
   * 论坛    :http://www.firebbs.cn
   * 淘宝    :https://fire-stm32.taobao.com
   *
@@ -45,18 +45,19 @@ int main(void)
 	/*步进电机初始化*/
 	stepper_Init();	
 
-	MOTOR_EN(ON);
+
 	while(1)
 	{     
 		if(Key_Scan(KEY2_GPIO_PORT,KEY2_PIN) == KEY_ON)
 		{
+			MOTOR_EN(ON);
 			/*步进电机加速部分*/
-			stepper_move_S(1,100,0.1f);
+			stepper_move_S(1,300,0.5f);
 		}
 		if( Stepper.status == AVESPEED)
     {
 			/*步进电机减速部分*/
-			stepper_move_S(100,1,0.1f);
+			stepper_move_S(300,1,0.5f);
       Stepper.status = DECEL;    
     }
 	}

@@ -12,7 +12,7 @@
 
 #define CONVER(speed)  ((speed) * FSPR * MICRO_STEP / 60)  // 根据电机转速（r/min），计算电机步速（step/s）
 
-#define FORM_LEN 	   1000
+#define FORM_LEN 	   8000
 
 typedef struct {
 	uint8_t 	status;			/*状态*/
@@ -45,7 +45,7 @@ extern SpeedCalc_TypeDef Speed ;
 //其中 高级定时器的 频率为168MHz,其他定时器为84MHz
 //168/(168)=1Mhz
 //具体需要的频率可以自己计算
-#define TIM_PRESCALER         1 
+#define TIM_PRESCALER         72 
 #define T1_FREQ               (SystemCoreClock/(TIM_PRESCALER+1)) // 频率ft值
 
 
