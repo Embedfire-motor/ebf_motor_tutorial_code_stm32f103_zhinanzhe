@@ -27,14 +27,14 @@ typedef struct{
 
 /*********************X轴电机引脚定义*******************/
 //Motor 方向
-#define X_MOTOR_DIR_PIN                      GPIO_PIN_4
-#define X_MOTOR_DIR_GPIO_PORT                GPIOE
-#define X_MOTOR_DIR_GPIO_CLK_ENABLE()        __HAL_RCC_GPIOE_CLK_ENABLE()
+#define X_MOTOR_DIR_PIN                      GPIO_PIN_14
+#define X_MOTOR_DIR_GPIO_PORT                GPIOB
+#define X_MOTOR_DIR_GPIO_CLK_ENABLE()        __HAL_RCC_GPIOB_CLK_ENABLE()
 
 //Motor 使能
-#define X_MOTOR_EN_PIN                       GPIO_PIN_4
-#define X_MOTOR_EN_GPIO_PORT                 GPIOC
-#define X_MOTOR_EN_GPIO_CLK_ENABLE()         __HAL_RCC_GPIOC_CLK_ENABLE()
+#define X_MOTOR_EN_PIN                       GPIO_PIN_12
+#define X_MOTOR_EN_GPIO_PORT                 GPIOB
+#define X_MOTOR_EN_GPIO_CLK_ENABLE()         __HAL_RCC_GPIOB_CLK_ENABLE()
 
 //Motor 脉冲
 #define X_MOTOR_PUL_PORT                     GPIOC
@@ -46,12 +46,12 @@ typedef struct{
 
 /*********************Y轴电机引脚定义*******************/
 //Motor 方向
-#define Y_MOTOR_DIR_PIN                      GPIO_PIN_11
+#define Y_MOTOR_DIR_PIN                      GPIO_PIN_15
 #define Y_MOTOR_DIR_GPIO_PORT                GPIOB        
 #define Y_MOTOR_DIR_GPIO_CLK_ENABLE()        __HAL_RCC_GPIOB_CLK_ENABLE()
 
 //Motor 使能
-#define Y_MOTOR_EN_PIN                       GPIO_PIN_10
+#define Y_MOTOR_EN_PIN                       GPIO_PIN_13
 #define Y_MOTOR_EN_GPIO_PORT                 GPIOB                       
 #define Y_MOTOR_EN_GPIO_CLK_ENABLE()      	 __HAL_RCC_GPIOB_CLK_ENABLE()
 

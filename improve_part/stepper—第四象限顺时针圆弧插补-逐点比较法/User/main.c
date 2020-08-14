@@ -4,11 +4,11 @@
   * @author  fire
   * @version V1.0
   * @date    2020-xx-xx
-  * @brief   第三象限顺时针圆弧-逐点比较法
+  * @brief   第四象限顺时针圆弧-逐点比较法
   ******************************************************************************
   * @attention
   *
-  * 实验平台:野火 F103-霸道 STM32 开发板 
+  * 实验平台:野火 F103-指南者 STM32 开发板 
   * 论坛    :http://www.firebbs.cn
   * 淘宝    :https://fire-stm32.taobao.com
   *
@@ -37,7 +37,7 @@ int main(void)
 	SystemClock_Config();
 	/*初始化USART 配置模式为 115200 8-N-1，中断接收*/
 	DEBUG_USART_Config();
-	printf("欢迎使用野火 电机开发板 步进电机 第三象限圆弧插补 例程\r\n");
+	printf("欢迎使用野火 电机开发板 步进电机 第四象限圆弧插补 例程\r\n");
   /* LED初始化 */
   LED_GPIO_Config();
   /* 按键初始化 */
