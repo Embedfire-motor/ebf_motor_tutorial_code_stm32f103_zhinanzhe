@@ -76,7 +76,7 @@ int main(void)
     if( Key_Scan(KEY1_GPIO_PORT,KEY1_PIN) == KEY_ON  )
 		{
       /* 目标位置增加48000，对应电机位置增加20圈 */
-      move_pid.target_val += 48000;
+      move_pid.target_val += 80000;
       
     #if PID_ASSISTANT_EN
       int temp = move_pid.target_val;
@@ -87,7 +87,7 @@ int main(void)
     if( Key_Scan(KEY2_GPIO_PORT,KEY2_PIN) == KEY_ON  )
 		{
       /* 目标位置减小48000，对应电机位置减少20圈 */
-      move_pid.target_val -= 48000;
+      move_pid.target_val -= 80000;
       
     #if PID_ASSISTANT_EN
       int temp = move_pid.target_val;

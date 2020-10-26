@@ -77,7 +77,7 @@ int main(void)
     if( Key_Scan(KEY1_GPIO_PORT,KEY1_PIN) == KEY_ON  )
 		{
       /* 目标速度增加48，对应电机转速增加1 */
-      pid.target_val += 48;
+      pid.target_val += 80;
       
     #if PID_ASSISTANT_EN
       int temp = pid.target_val;
@@ -88,7 +88,7 @@ int main(void)
     if( Key_Scan(KEY2_GPIO_PORT,KEY2_PIN) == KEY_ON  )
 		{
       /* 目标速度减小48，对应电机转速减少1 */
-      pid.target_val -= 48;
+      pid.target_val -= 80;
       
     #if PID_ASSISTANT_EN
       int temp = pid.target_val;

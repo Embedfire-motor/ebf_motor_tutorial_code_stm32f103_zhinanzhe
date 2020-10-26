@@ -77,7 +77,7 @@ int main(void)
     if( Key_Scan(KEY1_GPIO_PORT,KEY1_PIN) == KEY_ON  )
 		{
 			/* 位置增加2圈 */
-      pid.target_val += 4800;
+      pid.target_val += 8000;
       
     #if PID_ASSISTANT_EN
       int temp = pid.target_val;
@@ -88,7 +88,7 @@ int main(void)
     if( Key_Scan(KEY2_GPIO_PORT,KEY2_PIN) == KEY_ON  )
 		{
 			/* 位置减小2圈 */
-      pid.target_val -= 4800;
+      pid.target_val -= 8000;
       
     #if PID_ASSISTANT_EN
       int temp = pid.target_val;
