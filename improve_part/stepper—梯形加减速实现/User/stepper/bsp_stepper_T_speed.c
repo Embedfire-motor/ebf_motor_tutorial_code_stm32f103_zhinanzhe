@@ -29,9 +29,9 @@ struct GLOBAL_FLAGS status = {FALSE, FALSE,TRUE};
  *  通过计算加速到最大速度，以给定的步数开始减速
  *  如果加速度和减速度很小，步进电机会移动很慢，还没达到最大速度就要开始减速
  *  \param step   移动的步数 (正数为顺时针，负数为逆时针).
- *  \param accel  加速度,如果取值为100，实际值为100*0.01*rad/sec^2=1rad/sec^2
- *  \param decel  减速度,如果取值为100，实际值为100*0.01*rad/sec^2=1rad/sec^2
- *  \param speed  最大速度,如果取值为100，实际值为100*0.01*rad/sec=1rad/sec
+ *  \param accel  加速度,如果取值为10，实际值为10*0.1*rad/sec^2=1rad/sec^2
+ *  \param decel  减速度,如果取值为10，实际值为10*0.1*rad/sec^2=1rad/sec^2
+ *  \param speed  最大速度,如果取值为10，实际值为10*0.1*rad/sec=1rad/sec
  */
 void stepper_move_T( int32_t step, uint32_t accel, uint32_t decel, uint32_t speed)
 {  
@@ -136,8 +136,10 @@ void stepper_move_T( int32_t step, uint32_t accel, uint32_t decel, uint32_t spee
 	/*在当前计数值基础上设置定时器比较值*/
 	__HAL_TIM_SET_COMPARE(&TIM_TimeBaseStructure,MOTOR_PUL_CHANNEL_x,tim_count+srd.step_delay); 
 	/*使能定时器通道*/
-	TIM_CCxChannelCmd(MOTOR_PUL_TIM, MOTOR_PUL_CHANNEL_x, TIM_CCx_ENABLE);
-	MOTOR_EN(ON);
+	TIM_CCxChannelCmd(MOTOR_PUL_TIM, MOTOR_PUL_CHANNEL_x, TIM_CCx_DISABLE);
+  __HAL_TIM_ENABLE_IT(&TIM_TimeBaseStructure, TIM_IT_CC1);
+  __HAL_TIM_MOE_ENABLE(&TIM_TimeBaseStructure);
+  __HAL_TIM_ENABLE(&TIM_TimeBaseStructure);
 }
 
 /**
@@ -180,13 +182,14 @@ void speed_decision()
 				step_count = 0;  // 清零步数计数器
 				rest = 0;        // 清零余值
 				// 关闭通道
-				TIM_CCxChannelCmd(MOTOR_PUL_TIM, MOTOR_PUL_CHANNEL_x, TIM_CCx_DISABLE);        
-				__HAL_TIM_CLEAR_FLAG(&TIM_TimeBaseStructure, MOTOR_TIM_FLAG_CCx);
+				HAL_TIM_OC_Stop_IT(&TIM_TimeBaseStructure,MOTOR_PUL_CHANNEL_x);
+
 
 				status.running = FALSE;
 				break;
 				/*步进电机加速状态*/
 				case ACCEL:
+				TIM_CCxChannelCmd(MOTOR_PUL_TIM, MOTOR_PUL_CHANNEL_x, TIM_CCx_ENABLE);
 				step_count++;
 				srd.accel_count++;
 

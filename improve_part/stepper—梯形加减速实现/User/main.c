@@ -48,6 +48,7 @@ int main(void)
 	printf("欢迎使用野火 电机开发板 步进电机 加减速正反旋转 例程\r\n");
 	/*步进电机初始化*/
 	stepper_Init();
+	MOTOR_EN(HIGH);
 	int i=0,dir_val=0;
 	while(1)
 	{     
@@ -62,7 +63,7 @@ int main(void)
 			stepper_move_T(-6400*10, accel_val, decel_val, set_speed);
 		}
 		
-		HAL_Delay(2000);//要等旋转再反向旋转
+		HAL_Delay(5000);//要等旋转再反向旋转
 	}
 } 	
 
