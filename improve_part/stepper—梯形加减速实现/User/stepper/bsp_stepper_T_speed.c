@@ -168,7 +168,7 @@ void speed_decision()
 
 		// 设置比较值
 		tim_count=__HAL_TIM_GET_COUNTER(&TIM_TimeBaseStructure);
-		tmp = tim_count+srd.step_delay;
+		tmp = tim_count+srd.step_delay/2;
 		__HAL_TIM_SET_COMPARE(&TIM_TimeBaseStructure,MOTOR_PUL_CHANNEL_x,tmp);
 
 		i++;     // 定时器中断次数计数值
