@@ -7,7 +7,7 @@
   ******************************************************************************
   * @attention
   *
-  * 实验平台:野火 F407 开发板 
+  * 实验平台:野火 F103 开发板 
   * 论坛    :http://www.firebbs.cn
   * 淘宝    :https://fire-stm32.taobao.com
   *
@@ -16,7 +16,7 @@
 
 #include "./protocol/protocol.h"
 #include <string.h>
-#include ".\motor_control\bsp_motor_control.h"
+#include ".\bldcm_control\bsp_bldcm_control.h"
 #include "./pid/bsp_pid.h"
 #include "./tim/bsp_basic_tim.h"
 

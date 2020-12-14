@@ -64,9 +64,10 @@ void HAL_UART_MspInit(UART_HandleTypeDef *huart)
   DEBUG_USART_RX_GPIO_CLK_ENABLE();
   DEBUG_USART_TX_GPIO_CLK_ENABLE();
   
+//	DEBUG_USART_AF_ENABLE();
 /**USART1 GPIO Configuration    
-  PA9     ------> USART1_TX
-  PA10    ------> USART1_RX 
+  PB6     ------> USART1_TX
+  PB7    ------> USART1_RX 
   */
   /* ≈‰÷√Tx“˝Ω≈  */
   GPIO_InitStruct.Pin = DEBUG_USART_TX_PIN;

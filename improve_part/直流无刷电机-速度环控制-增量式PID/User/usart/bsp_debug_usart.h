@@ -2,8 +2,8 @@
 #define __DEBUG_USART_H
 
 #include "stm32f1xx.h"
-#include <stdio.h>
 #include "./protocol/protocol.h"
+#include <stdio.h>
 
 //串口接收缓冲数组大小
 #define UART_RX_BUFFER_SIZE 256 
@@ -27,11 +27,14 @@ extern uint8_t receive_cmd;
 #define DEBUG_USART_RX_PIN                      GPIO_PIN_10
 
 #define DEBUG_USART_TX_GPIO_PORT                GPIOA
-#define DEBUG_USART_TX_GPIO_CLK_ENABLE()        __HAL_RCC_GPIOA_CLK_ENABLE()
+#define DEBUG_USART_TX_GPIO_CLK_ENABLE()       __HAL_RCC_GPIOA_CLK_ENABLE()
 #define DEBUG_USART_TX_PIN                      GPIO_PIN_9
 
 #define DEBUG_USART_IRQHandler                  USART1_IRQHandler
-#define DEBUG_USART_IRQ                         USART1_IRQn
+#define DEBUG_USART_IRQ                 		    USART1_IRQn
+
+//将串口1复用到PB6\PB7上
+#define DEBUG_USART_AF_ENABLE()					      	__HAL_AFIO_REMAP_USART1_ENABLE()
 /************************************************************/
 
 void uart_FlushRxBuffer(void);

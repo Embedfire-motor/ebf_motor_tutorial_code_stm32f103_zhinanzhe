@@ -3,7 +3,7 @@
 
 #include "stm32f1xx.h"
 #include "./led/bsp_led.h"   
-#include ".\motor_control\bsp_motor_control.h"
+#include ".\bldcm_control\bsp_bldcm_control.h"
 #include <stdio.h>
 
 /* 电机控旋转实现结构体 */
@@ -13,7 +13,7 @@
 typedef struct
 {
   int32_t timeout;            // 定时器更新计数
-  float speed;                // 电机速度 rps（转/秒）
+  float speed;                // 电机速度 rps（转/分钟）
   int32_t enable_flag;        // 电机使能标志
   int32_t speed_group[SPEED_FILTER_NUM];
 }motor_rotate_t;
@@ -30,7 +30,7 @@ extern TIM_HandleTypeDef  htimx_bldcm;
 #define PWM_MAX_PERIOD_COUNT    (PWM_PERIOD_COUNT - 100)
 
 /* 高级控制定时器时钟源TIMxCLK = HCLK = 72MHz 
-	 设定定时器频率为=TIMxCLK/(PWM_PRESCALER_COUNT+1)/PWM_PERIOD_COUNT = 15KHz*/
+	 设定定时器频率为=TIMxCLK/(PWM_PRESCALER_COUNT)/PWM_PERIOD_COUNT = 15KHz*/
 #define PWM_PRESCALER_COUNT     (2)
 
 #define MOTOR_OCPWM1_AF_ENABLE()          __HAL_AFIO_REMAP_TIM1_ENABLE();
@@ -74,11 +74,11 @@ extern TIM_HandleTypeDef  htimx_bldcm;
 extern TIM_HandleTypeDef htimx_hall;
 
 /* 累计 TIM_Period个后产生一个更新或者中断		
-	当定时器从0计数到4999，即为5000次，为一个定时周期 */
+	当定时器从0计数到65535，即为65535次，为一个计数周期 */
 #define HALL_PERIOD_COUNT     (0xFFFF)
 
 /* 高级控制定时器时钟源TIMxCLK = HCLK = 72MHz
-	 设定定时器频率为 = TIMxCLK / (PWM_PRESCALER_COUNT + 1) / PWM_PERIOD_COUNT = 9.987Hz
+	 设定定时器频率为 = TIMxCLK / (PWM_PRESCALER_COUNT) / PWM_PERIOD_COUNT = 9.987Hz
    周期 T = 100ms */
 #define HALL_PRESCALER_COUNT     (110)
 

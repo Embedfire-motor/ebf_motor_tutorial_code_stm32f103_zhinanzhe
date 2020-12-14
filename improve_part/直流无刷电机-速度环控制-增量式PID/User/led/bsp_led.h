@@ -5,20 +5,25 @@
 
 //引脚定义
 /*******************************************************/
-//R 红色灯
-#define LED1_PIN                  GPIO_PIN_5                
-#define LED1_GPIO_PORT            GPIOB                     
-#define LED1_GPIO_CLK_ENABLE()   __HAL_RCC_GPIOB_CLK_ENABLE()
+//LED1
+#define LED1_PIN                  GPIO_PIN_8                
+#define LED1_GPIO_PORT            GPIOA                     
+#define LED1_GPIO_CLK_ENABLE()   __HAL_RCC_GPIOA_CLK_ENABLE()
 
-//G 绿色灯
-#define LED2_PIN                  GPIO_PIN_0               
-#define LED2_GPIO_PORT            GPIOB                      
-#define LED2_GPIO_CLK_ENABLE()   __HAL_RCC_GPIOB_CLK_ENABLE()
+//LED2
+#define LED2_PIN                  GPIO_PIN_9
+#define LED2_GPIO_PORT            GPIOA                     
+#define LED2_GPIO_CLK_ENABLE()   __HAL_RCC_GPIOA_CLK_ENABLE()
 
-//B 蓝色灯
-#define LED3_PIN                  GPIO_PIN_1              
-#define LED3_GPIO_PORT            GPIOB                       
-#define LED3_GPIO_CLK_ENABLE()    __HAL_RCC_GPIOB_CLK_ENABLE()
+//LED3
+#define LED3_PIN                  GPIO_PIN_10              
+#define LED3_GPIO_PORT            GPIOA                      
+#define LED3_GPIO_CLK_ENABLE()    __HAL_RCC_GPIOA_CLK_ENABLE()
+
+//LED4
+#define LED4_PIN                  GPIO_PIN_14              
+#define LED4_GPIO_PORT            GPIOE                       
+#define LED4_GPIO_CLK_ENABLE()    __HAL_RCC_GPIOE_CLK_ENABLE()
 
 /************************************************************/
 
@@ -37,9 +42,9 @@
 #define LED2(a)	HAL_GPIO_WritePin(LED2_GPIO_PORT,LED2_PIN,a)
 
 
-#define LED3(a)	HAL_GPIO_WritePin(LED2_GPIO_PORT,LED3_PIN,a)
+#define LED3(a)	HAL_GPIO_WritePin(LED3_GPIO_PORT,LED3_PIN,a)
 
-
+#define LED4(a)	HAL_GPIO_WritePin(LED4_GPIO_PORT,LED4_PIN,a)
 
 
 /* 直接操作寄存器的方法控制IO */
@@ -61,61 +66,17 @@
 #define LED3_OFF		digitalHi(LED3_GPIO_PORT,LED3_PIN)
 #define LED3_ON			digitalLo(LED3_GPIO_PORT,LED3_PIN)
 
+#define LED4_TOGGLE		digitalToggle(LED4_GPIO_PORT,LED4_PIN)
+#define LED4_OFF		digitalHi(LED4_GPIO_PORT,LED4_PIN)
+#define LED4_ON			digitalLo(LED4_GPIO_PORT,LED4_PIN)
 
-
-/* 基本混色，后面高级用法使用PWM可混出全彩颜色,且效果更好 */
-
-//红
-#define LED_RED  \
-					LED1_ON;\
-					LED2_OFF\
-					LED3_OFF
-
-//绿
-#define LED_GREEN		\
-					LED1_OFF;\
-					LED2_ON\
-					LED3_OFF
-
-//蓝
-#define LED_BLUE	\
-					LED1_OFF;\
-					LED2_OFF\
-					LED3_ON
-
-					
-//黄(红+绿)					
-#define LED_YELLOW	\
-					LED1_ON;\
-					LED2_ON\
-					LED3_OFF
-//紫(红+蓝)
-#define LED_PURPLE	\
-					LED1_ON;\
-					LED2_OFF\
-					LED3_ON
-
-//青(绿+蓝)
-#define LED_CYAN \
-					LED1_OFF;\
-					LED2_ON\
-					LED3_ON
-					
-//白(红+绿+蓝)
-#define LED_WHITE	\
-					LED1_ON;\
-					LED2_ON\
-					LED3_ON
-					
 //黑(全部关闭)
-#define LED_RGBOFF	\
+#define LED_ALLOFF	\
 					LED1_OFF;\
-					LED2_OFF\
-					LED3_OFF
+					LED2_OFF;\
+          LED3_OFF;\
+					LED4_OFF
 					
-
-
-
 
 void LED_GPIO_Config(void);
 

@@ -1,5 +1,5 @@
 #include "./pid/bsp_pid.h"
-#include ".\motor_control\bsp_motor_control.h"
+#include ".\bldcm_control\bsp_bldcm_control.h"
 
 //定义全局变量
 _pid pid;
@@ -18,13 +18,13 @@ void PID_param_init()
   pid.err_last = 0.0;
   pid.err_next = 0.0;
   
-  pid.Kp = 0.15;
-  pid.Ki = 0.06;
-  pid.Kd = 0.00;
+  pid.Kp = 0.1;
+  pid.Ki = 0.035;
+  pid.Kd = 0.0;
   
 #if defined(PID_ASSISTANT_EN)
   float pid_temp[3] = {pid.Kp, pid.Ki, pid.Kd};
-//  set_computer_value(SEND_P_I_D_CMD, CURVES_CH1, pid_temp, 3);     // 给通道 1 发送 P I D 值
+  set_computer_value(SEND_P_I_D_CMD, CURVES_CH1, pid_temp, 3);     // 给通道 1 发送 P I D 值
 #endif
 }
 
@@ -36,16 +36,6 @@ void PID_param_init()
   */
 void set_pid_target(float temp_val)
 {
-  if (temp_val < 0)
-  {
-    temp_val = -temp_val;
-    set_bldcm_direction(MOTOR_REV);
-  }
-  else
-  {
-    set_bldcm_direction(MOTOR_FWD);
-  }
-    
   pid.target_val = temp_val;    // 设置当前的目标值
 }
 
@@ -97,3 +87,7 @@ float PID_realize(float temp_val)
 	/*返回当前实际值*/
 	return pid.actual_val;
 }
+
+
+
+

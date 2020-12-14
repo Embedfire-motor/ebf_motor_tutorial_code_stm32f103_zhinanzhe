@@ -65,7 +65,7 @@ extern TIM_HandleTypeDef htimx_hall;
 	当定时器从0计数到4999，即为5000次，为一个定时周期 */
 #define HALL_PERIOD_COUNT     (0xFFFF)
 
-/* 高级控制定时器时钟源TIMxCLK = HCLK = 72MHz
+/* 通用控制定时器时钟源TIMxCLK = HCLK = 72MHz
 	 设定定时器频率为 = TIMxCLK / (PWM_PRESCALER_COUNT + 1) / PWM_PERIOD_COUNT = 9.987Hz
    周期 T = 100ms */
 #define HALL_PRESCALER_COUNT     (110)

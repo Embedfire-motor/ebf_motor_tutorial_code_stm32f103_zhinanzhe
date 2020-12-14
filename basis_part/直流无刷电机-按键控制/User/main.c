@@ -94,12 +94,6 @@ int main(void)
       set_bldcm_disable();
     }
 
-//    /* É¨ÃèKEY5 */
-//    if( Key_Scan(KEY5_GPIO_PORT, KEY5_PIN) == KEY_ON)
-//    {
-//      /* ×ª»»·½Ïò */
-//      set_bldcm_direction( (++i % 2) ? MOTOR_FWD : MOTOR_REV);
-//    }
 	}
 }
 

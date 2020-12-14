@@ -8,7 +8,7 @@
   ******************************************************************************
   * @attention
   *
-  * 实验平台:野火 F103-指南者 STM32 开发板 
+  * 实验平台:野火 F103-拂晓 STM32 开发板 
   * 论坛    :http://www.firebbs.cn
   * 淘宝    :https://fire-stm32.taobao.com
   *
@@ -18,14 +18,13 @@
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
 #include <stdlib.h>
-#include ".\motor_control\bsp_motor_control.h"
+#include ".\bldcm_control\bsp_bldcm_control.h"
 #include "./led/bsp_led.h"
 #include "./key/bsp_key.h" 
 #include "./usart/bsp_debug_usart.h"
 #include "./tim/bsp_basic_tim.h"
 #include "./pid/bsp_pid.h"
 #include "./protocol/protocol.h"
-
 /**
   * @brief  主函数
   * @param  无
@@ -33,46 +32,49 @@
   */
 int main(void) 
 {
-  int16_t target_speed = 1500;
-	
-  /* HAL 初始化 */
-  HAL_Init();
+  __IO uint16_t ChannelPulse = PWM_MAX_PERIOD_COUNT/10;
+	int16_t target_speed = 2000;
 	
 	/* 初始化系统时钟为72MHz */
 	SystemClock_Config();
 
+	/* HAL 库初始化 */
+  HAL_Init();
+	
 	/* 开启复用寄存器时钟 */
 	__HAL_RCC_SYSCFG_CLK_ENABLE();
+	/* 禁用JTAG,PB3引脚冲突 */
+	__HAL_AFIO_REMAP_SWJ_NOJTAG();
 	
 	/* 初始化按键GPIO */
 	Key_GPIO_Config();
   
   /* LED 灯初始化 */
   LED_GPIO_Config();
-
-  /* 协议初始化 */
+  
+	/* 协议初始化 */
   protocol_init();
 	
   /* 调试串口初始化 */
   DEBUG_USART_Config();
-
+  
 	/* PID参数初始化 */
 	PID_param_init();
 	
-  /* 周期控制定时器 50ms */
+	/* 周期控制定时器 50ms */
   TIMx_Configuration();
 	
   /* 电机初始化 */
   bldcm_init();
 	
-  /* 设置目标速度 */
+	/* 设置目标速度 */
   set_pid_target(target_speed);
-
+	
 #if defined(PID_ASSISTANT_EN)
   set_computer_value(SEND_STOP_CMD, CURVES_CH1, NULL, 0);                // 同步上位机的启动按钮状态
   set_computer_value(SEND_TARGET_CMD, CURVES_CH1, &target_speed, 1);     // 给通道 1 发送目标值
 #endif
-	
+
 	while(1)
 	{
     /* 接收数据处理 */
@@ -124,25 +126,6 @@ int main(void)
 				}
 			}
     }
-    
-#if 0//按键数量少,换向\禁用电机功能暂时不用,请使用PID调试助手调试
-			/* 扫描KEY2 */
-    if( Key_Scan(KEY2_GPIO_PORT,KEY2_PIN) == KEY_ON  )
-    {
-      /* 停止电机 */
-      set_bldcm_disable();
-      
-    #if defined(PID_ASSISTANT_EN) 
-      set_computer_value(SEND_STOP_CMD, CURVES_CH1, NULL, 0);               // 同步上位机的启动按钮状态
-    #endif
-    }
-    /* 扫描KEY5 */
-    if( Key_Scan(KEY5_GPIO_PORT,KEY5_PIN) == KEY_ON  )
-    {
-      /* 转换方向 */
-      set_bldcm_direction( (++i % 2) ? MOTOR_FWD : MOTOR_REV);
-    }
-#endif
 	}
 }
 

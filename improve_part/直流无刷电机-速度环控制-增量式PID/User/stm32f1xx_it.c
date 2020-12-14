@@ -41,7 +41,6 @@
 #include "./led/bsp_led.h"
 #include "./tim/bsp_motor_tim.h"
 #include "./usart/bsp_debug_usart.h"
-#include "./adc/bsp_adc.h"
 #include "./tim/bsp_basic_tim.h"
 
 //接收数组指针
@@ -178,24 +177,13 @@ void SysTick_Handler(void)
   */
 
 // 串口中断服务函数
-volatile uint8_t sr_status;
+
 void DEBUG_USART_IRQHandler(void)
 {
-	sr_status = UartHandle.Instance->SR & (1<<3);//clear SR register ORE bit status
   uint8_t dr = __HAL_UART_FLUSH_DRREGISTER(&UartHandle);
 	protocol_data_recv(&dr, 1);
   
   HAL_UART_IRQHandler(&UartHandle);
-}
-
-/**
-  * @brief  This function handles TIM interrupt request.
-  * @param  None
-  * @retval None
-  */	
-void BASIC_TIM_IRQHandler(void)
-{
-	HAL_TIM_IRQHandler(&TIM_TimeBaseStructure);	 	
 }
 
 /**
@@ -206,24 +194,9 @@ void HALL_TIM_IRQHandler(void)
   HAL_TIM_IRQHandler(&htimx_hall);
 }
 
-/**
-  * @brief  This function handles DMA interrupt request.
-  * @param  None
-  * @retval None
-  */
-void ADC_DMA_IRQ_Handler(void)
+void BASIC_TIM_IRQHandler (void)
 {
-  HAL_DMA_IRQHandler(&DMA_Init_Handle);
-}
-
-/**
-  * @brief  This function handles ADC interrupt request.
-  * @param  None
-  * @retval None
-  */
-void ADC_VBUS_IRQHandler(void)
-{
-  HAL_ADC_IRQHandler(&ADC_Handle);
+	HAL_TIM_IRQHandler(&TIM_TimeBaseStructure);	 	
 }
 /**
   * @}
