@@ -46,20 +46,22 @@ int main(void)
   LED_GPIO_Config();
   /*步进电机初始化*/
   stepper_Init();
+  
+  MOTOR_EN(HIGH);
 
   while(1)
   {
-    if( Key_Scan(KEY2_GPIO_PORT, KEY2_PIN) == KEY_ON  )
+    if( Key_Scan(KEY1_GPIO_PORT, KEY1_PIN) == KEY_ON  )
     {
-      LED2_TOGGLE;
+      LED1_TOGGLE;
       
       OC_Pulse_num -= 20;
       if(OC_Pulse_num <= 20)
         OC_Pulse_num = 20;
     }
-    if( Key_Scan(KEY3_GPIO_PORT, KEY3_PIN) == KEY_ON  )
+    if( Key_Scan(KEY2_GPIO_PORT, KEY2_PIN) == KEY_ON  )
     {
-      LED3_TOGGLE;
+      LED2_TOGGLE;
       
       OC_Pulse_num += 20;
       if(OC_Pulse_num >= 400)

@@ -7,18 +7,18 @@
 /*宏定义*/
 /*******************************************************/
 //宏定义对应开发板的接口 1 、2 、3 、4
-#define CHANNEL_SW 1
+#define CHANNEL_SW   1
 
 #if(CHANNEL_SW == 1)
-//Motor 方向
-#define MOTOR_DIR_PIN                   GPIO_PIN_6
-#define MOTOR_DIR_GPIO_PORT             GPIOE
-#define MOTOR_DIR_GPIO_CLK_ENABLE()     __HAL_RCC_GPIOE_CLK_ENABLE()
+//Motor 使能 
+#define MOTOR_EN_PIN                    GPIO_PIN_12
+#define MOTOR_EN_GPIO_PORT              GPIOB
+#define MOTOR_EN_GPIO_CLK_ENABLE()      __HAL_RCC_GPIOB_CLK_ENABLE()
 
-//Motor 使能
-#define MOTOR_EN_PIN                    GPIO_PIN_5
-#define MOTOR_EN_GPIO_PORT              GPIOE
-#define MOTOR_EN_GPIO_CLK_ENABLE()      __HAL_RCC_GPIOE_CLK_ENABLE()
+//Motor 方向 
+#define MOTOR_DIR_PIN                   GPIO_PIN_14
+#define MOTOR_DIR_GPIO_PORT             GPIOB
+#define MOTOR_DIR_GPIO_CLK_ENABLE()     __HAL_RCC_GPIOB_CLK_ENABLE()
 
 //Motor 脉冲
 #define MOTOR_PUL_IRQn                  TIM8_CC_IRQn
@@ -36,15 +36,15 @@
 
 #elif(CHANNEL_SW == 2)
 
-//Motor 方向
-#define MOTOR_DIR_PIN                   GPIO_PIN_15
-#define MOTOR_DIR_GPIO_PORT             GPIOD
-#define MOTOR_DIR_GPIO_CLK_ENABLE()     __HAL_RCC_GPIOD_CLK_ENABLE()
-
 //Motor 使能
 #define MOTOR_EN_PIN                    GPIO_PIN_13
-#define MOTOR_EN_GPIO_PORT              GPIOC
+#define MOTOR_EN_GPIO_PORT              GPIOB
 #define MOTOR_EN_GPIO_CLK_ENABLE()      __HAL_RCC_GPIOC_CLK_ENABLE()
+
+//Motor 方向
+#define MOTOR_DIR_PIN                   GPIO_PIN_15
+#define MOTOR_DIR_GPIO_PORT             GPIOB
+#define MOTOR_DIR_GPIO_CLK_ENABLE()     __HAL_RCC_GPIOD_CLK_ENABLE()
 
 //Motor 脉冲
 #define MOTOR_PUL_IRQn                  TIM8_CC_IRQn

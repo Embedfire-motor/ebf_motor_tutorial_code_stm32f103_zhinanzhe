@@ -72,6 +72,7 @@ static void Stepper_GPIO_Config(void)
   GPIO_InitStruct.Pin = MOTOR_PUL_PIN;
   /*Motor Âö³åÒý½Å ³õÊ¼»¯*/
   HAL_GPIO_Init(MOTOR_PUL_PORT, &GPIO_InitStruct);
+  
 }
 
 
